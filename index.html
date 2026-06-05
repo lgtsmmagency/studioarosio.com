@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Studio Arosio Franco — Dottore Commercialista a Seregno. Consulenza fiscale, contabile e societaria per privati, professionisti e imprese." />
+  <title>Studio Arosio Franco — Commercialista Seregno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal: #0ABAB5;
+      --teal-dark: #089590;
+      --teal-light: #e6f7f7;
+      --navy: #0f2640;
+      --navy-mid: #1a3a5c;
+      --white: #ffffff;
+      --off-white: #f7f9f9;
+      --gray: #6b7c8a;
+      --gray-light: #e8ecef;
+      --text: #1a2a36;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 70px;
+      transition: background .3s, border-color .3s;
+    }
+    nav.scrolled { background: rgba(15,38,64,0.97); border-bottom: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(12px); }
+    .nav-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--white); text-decoration: none; letter-spacing: .02em; }
+    .nav-logo .dot { color: var(--teal); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .8rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta { font-size: .78rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--navy) !important; background: var(--teal); padding: .52rem 1.4rem; border-radius: 2px; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: var(--teal-dark) !important; color: var(--white) !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+    .nav-mobile { display: none; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: var(--navy); padding: 2rem 5vw; gap: 1.5rem; z-index: 199; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: .95rem; color: rgba(255,255,255,.7); text-decoration: none; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+
+    /* HERO */
+    #home { min-height: 100vh; background: var(--navy); display: flex; flex-direction: column; justify-content: flex-end; position: relative; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(15,38,64,.4) 0%, rgba(15,38,64,.6) 50%, rgba(15,38,64,.92) 100%),
+        url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80') center/cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 80% 40%, rgba(10,186,181,.1) 0%, transparent 65%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 0 5vw 0; margin-top: 120px; max-width: 760px; opacity: 0; animation: fadeUp .9s .3s ease forwards; }
+    .hero-eyebrow { font-size: .72rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); display: flex; align-items: center; gap: .8rem; margin-bottom: 1.8rem; }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--teal); }
+    h1 { font-family: var(--serif); font-size: clamp(2.8rem, 5.2vw, 5rem); font-weight: 400; line-height: 1.08; color: var(--white); margin-bottom: 1.8rem; }
+    h1 em { font-style: italic; color: var(--teal); }
+    .hero-sub { font-size: 1.02rem; font-weight: 300; color: rgba(255,255,255,.55); max-width: 480px; line-height: 1.8; margin-bottom: 2.8rem; }
+    .hero-btn { display: inline-flex; align-items: center; gap: .5rem; background: var(--teal); color: var(--navy); font-size: .8rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: .95rem 2rem; text-decoration: none; border-radius: 2px; transition: background .2s; }
+    .hero-btn:hover { background: var(--teal-dark); color: var(--white); }
+
+    /* CBA-STYLE HERO CARDS */
+    .hero-cards { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.1); margin-top: 4rem; opacity: 0; animation: fadeUp .8s .7s ease forwards; }
+    .hero-card { padding: 2.5rem 2.8rem; border-right: 1px solid rgba(255,255,255,.08); background: rgba(15,38,64,.75); backdrop-filter: blur(8px); transition: background .3s; text-decoration: none; display: flex; flex-direction: column; gap: .5rem; }
+    .hero-card:last-child { border-right: none; }
+    .hero-card:hover { background: rgba(10,186,181,.15); }
+    .card-label { font-size: .68rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--teal); }
+    .card-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--white); line-height: 1.3; }
+    .card-arrow { font-size: .8rem; color: rgba(255,255,255,.3); margin-top: .3rem; transition: color .2s, transform .2s; }
+    .hero-card:hover .card-arrow { color: var(--teal); transform: translateX(4px); }
+
+    /* SECTIONS */
+    section.light { padding: 100px 5vw; background: var(--white); }
+    section.off { padding: 100px 5vw; background: var(--off-white); }
+    section.dark { padding: 100px 5vw; background: var(--navy); }
+
+    .section-label { font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); display: flex; align-items: center; gap: .7rem; margin-bottom: 1.2rem; }
+    .section-label::before { content: ''; display: block; width: 22px; height: 1px; background: var(--teal); }
+
+    h2 { font-family: var(--serif); font-size: clamp(2rem, 3.8vw, 3.2rem); font-weight: 400; line-height: 1.15; color: var(--text); margin-bottom: 1.5rem; }
+    h2 em { font-style: italic; color: var(--teal); }
+    h2.light-h { color: var(--white); }
+
+    /* STUDIO */
+    .studio-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 7vw; align-items: start; }
+    .studio-body { font-size: .97rem; font-weight: 300; color: #3a4a56; line-height: 1.9; margin-bottom: 1.2rem; }
+    .mv-stack { display: flex; flex-direction: column; gap: 1px; background: var(--gray-light); }
+    .mv-item { background: var(--white); padding: 2rem 2.4rem; display: grid; grid-template-columns: 120px 1fr; gap: 1.5rem; align-items: start; transition: background .25s; }
+    .mv-item:hover { background: var(--teal-light); }
+    .mv-tag { font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--gray); padding-top: 3px; }
+    .mv-text { font-family: var(--serif); font-size: 1.08rem; font-style: italic; line-height: 1.65; color: var(--text); }
+    .values-row { background: var(--off-white); padding: 1.8rem 2.4rem; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .val { font-size: .82rem; color: var(--gray); display: flex; align-items: center; gap: .5rem; }
+    .val::before { content: '—'; color: var(--teal); }
+
+    /* SERVIZI */
+    .servizi-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+    .servizi-lead { font-size: .97rem; font-weight: 300; color: var(--gray); max-width: 380px; line-height: 1.8; }
+    .servizi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--gray-light); border: 1px solid var(--gray-light); }
+    .serv-card { background: var(--white); padding: 2.4rem 1.8rem; display: flex; flex-direction: column; transition: background .25s, border-color .25s; border-bottom: 2px solid transparent; }
+    .serv-card:hover { background: var(--navy); border-color: var(--teal); }
+    .serv-card:hover .serv-num { color: rgba(255,255,255,.12); }
+    .serv-card:hover .serv-title { color: var(--white); }
+    .serv-card:hover .serv-body { color: rgba(255,255,255,.45); }
+    .serv-num { font-family: var(--serif); font-size: 2rem; color: var(--gray-light); line-height: 1; margin-bottom: 1.3rem; transition: color .25s; }
+    .serv-title { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; color: var(--text); margin-bottom: .7rem; line-height: 1.3; transition: color .25s; }
+    .serv-body { font-size: .84rem; font-weight: 300; color: var(--gray); line-height: 1.7; flex: 1; transition: color .25s; }
+
+    /* CONTATTI */
+    .contatti-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 7vw; align-items: start; }
+    .section-label.white { color: var(--teal); }
+    .info-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; }
+    .info-row { display: flex; gap: 1.5rem; padding: 1.4rem 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .info-row:last-child { border-bottom: none; }
+    .info-lbl { font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.35); min-width: 80px; padding-top: 2px; }
+    .info-val { font-size: .95rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+    .info-val a { color: var(--teal); text-decoration: none; }
+    .info-val.orari { display: grid; grid-template-columns: 1fr 1fr; gap: .2rem .8rem; font-size: .88rem; }
+    .orario-row { display: contents; }
+    .orario-day { color: rgba(255,255,255,.45); font-size: .82rem; }
+    .orario-time { color: rgba(255,255,255,.75); font-size: .82rem; }
+
+    .contact-form { display: grid; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group label { font-size: .68rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    .form-group input, .form-group select, .form-group textarea { border: none; border-bottom: 1px solid rgba(255,255,255,.15); padding: .8rem 0; font-family: var(--sans); font-size: .93rem; color: var(--white); background: transparent; outline: none; transition: border-color .2s; width: 100%; border-radius: 0; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,.2); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--navy); color: var(--white); }
+    .form-privacy { font-size: .76rem; color: rgba(255,255,255,.3); line-height: 1.5; }
+    .form-privacy a { color: var(--teal); text-decoration: none; }
+    .btn-submit { background: var(--teal); color: var(--navy); border: none; padding: 1rem 2.5rem; font-family: var(--sans); font-size: .8rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; justify-self: start; transition: background .2s, color .2s; border-radius: 2px; }
+    .btn-submit:hover { background: var(--teal-dark); color: var(--white); }
+
+    /* FOOTER */
+    footer { background: #080f18; padding: 3rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,.06); }
+    .footer-brand { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: rgba(255,255,255,.5); }
+    .footer-brand .dot { color: var(--teal); }
+    .footer-sub { font-size: .72rem; color: rgba(255,255,255,.22); margin-top: .3rem; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.28); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--teal); }
+    .footer-copy { font-size: .72rem; color: rgba(255,255,255,.18); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .studio-grid, .contatti-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .servizi-grid { grid-template-columns: 1fr 1fr; }
+      .hero-cards { grid-template-columns: 1fr; }
+      .hero-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .mv-item { grid-template-columns: 1fr; gap: .5rem; }
+      section.light, section.off, section.dark { padding: 64px 24px; }
+      footer { padding: 2.5rem 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .servizi-grid { grid-template-columns: 1fr; }
+      .info-val.orari { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">Studio Arosio<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#studio">Lo Studio</a></li>
+    <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+    <li><a href="#contatti" class="nav-cta">Consulenza</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="mobileMenu">
+  <a href="#studio">Lo Studio</a>
+  <a href="#servizi">Servizi</a>
+  <a href="#contatti">Contatti</a>
+  <a href="#contatti" style="color:var(--teal)!important">→ Richiedi consulenza</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Commercialista — Seregno, Brianza</div>
+    <h1>Il partner di fiducia per la tua <em>crescita</em> economica e fiscale.</h1>
+    <p class="hero-sub">Consulenza fiscale, contabile e societaria per privati, professionisti e imprese. Un team di esperti nel cuore della Brianza.</p>
+    <a href="#contatti" class="hero-btn">Richiedi una consulenza →</a>
+  </div>
+  <div class="hero-cards">
+    <a class="hero-card" href="#studio">
+      <div class="card-label">Lo Studio</div>
+      <div class="card-title">Da oltre dieci anni al fianco del tessuto imprenditoriale brianzolo</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="hero-card" href="#servizi">
+      <div class="card-label">I Servizi</div>
+      <div class="card-title">Fiscale, societario, lavoro e revisione legale in un unico studio</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="hero-card" href="#contatti">
+      <div class="card-label">Contattaci</div>
+      <div class="card-title">Business partner per privati, professionisti e imprese di ogni dimensione</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- LO STUDIO -->
+<section id="studio" class="light">
+  <div class="studio-grid">
+    <div class="reveal">
+      <div class="section-label">Chi siamo</div>
+      <h2>Lo <em>Studio</em></h2>
+      <p class="studio-body">Lo Studio Arosio Franco nasce dalla passione per la consulenza professionale e dall'impegno costante verso i propri clienti. Con sede nel cuore di Seregno, lo studio ha costruito nel tempo un team solido e multidisciplinare, capace di rispondere alle esigenze di una clientela diversificata.</p>
+      <p class="studio-body">Radicati nella Brianza e attenti alle sue dinamiche economiche, siamo un punto di riferimento per aziende, professionisti e privati che cercano non solo un consulente, ma un partner affidabile capace di guardare lontano.</p>
+    </div>
+    <div class="reveal">
+      <div class="mv-stack">
+        <div class="mv-item">
+          <div class="mv-tag">Mission</div>
+          <div class="mv-text">Affiancare privati, professionisti e imprese con competenza e un approccio umano, trasformando la complessità fiscale in opportunità di crescita e serenità.</div>
+        </div>
+        <div class="mv-item">
+          <div class="mv-tag">Vision</div>
+          <div class="mv-text">Essere il punto di riferimento per la consulenza economica e fiscale nel territorio di Seregno e della Brianza, costruendo relazioni di fiducia durature.</div>
+        </div>
+        <div class="mv-item" style="grid-template-columns:120px 1fr">
+          <div class="mv-tag">Il Titolare</div>
+          <div class="mv-text" style="font-style:normal;font-family:var(--sans);font-size:.93rem;color:#444;line-height:1.7">
+            <strong style="font-family:var(--serif);font-size:1.1rem;color:var(--text)">Dott. Franco Arosio</strong><br>
+            Dottore Commercialista e Revisore Legale<br>
+            <span style="color:var(--gray);font-size:.84rem">Via De Gasperi 4 — Seregno (MB)</span>
+          </div>
+        </div>
+        <div class="values-row">
+          <span class="val">Riservatezza</span>
+          <span class="val">Precisione</span>
+          <span class="val">Aggiornamento</span>
+          <span class="val">Relazione umana</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section id="servizi" class="off">
+  <div class="servizi-header reveal">
+    <div>
+      <div class="section-label">Cosa facciamo</div>
+      <h2>I nostri <em>servizi</em></h2>
+    </div>
+    <p class="servizi-lead">Dalla contabilità alla consulenza societaria, supporto completo per ogni esigenza fiscale e amministrativa.</p>
+  </div>
+  <div class="servizi-grid reveal">
+    <div class="serv-card"><div class="serv-num">01</div><div class="serv-title">Contabilità e Bilancio</div><p class="serv-body">Contabilità ordinaria e semplificata, bilancio d'esercizio e controllo di gestione.</p></div>
+    <div class="serv-card"><div class="serv-num">02</div><div class="serv-title">Consulenza Fiscale</div><p class="serv-body">Pianificazione tributaria, adempimenti periodici e assistenza in caso di accertamenti.</p></div>
+    <div class="serv-card"><div class="serv-num">03</div><div class="serv-title">Dichiarazioni dei Redditi</div><p class="serv-body">730, Redditi PF, SC, SP per privati, professionisti e società di ogni tipologia.</p></div>
+    <div class="serv-card"><div class="serv-num">04</div><div class="serv-title">Consulenza Societaria</div><p class="serv-body">Costituzione di società, modifiche statutarie, fusioni, scissioni e operazioni straordinarie.</p></div>
+    <div class="serv-card"><div class="serv-num">05</div><div class="serv-title">Paghe e Personale</div><p class="serv-body">Buste paga, INPS/INAIL, assunzioni, cessazioni e adempimenti contrattuali.</p></div>
+    <div class="serv-card"><div class="serv-num">06</div><div class="serv-title">Startup e Nuove Attività</div><p class="serv-body">Forma giuridica ottimale, regime fiscale, business plan e pianificazione finanziaria.</p></div>
+    <div class="serv-card"><div class="serv-num">07</div><div class="serv-title">Revisione Legale</div><p class="serv-body">Revisione legale, sindaco revisore e certificazione dei bilanci societari.</p></div>
+    <div class="serv-card"><div class="serv-num">08</div><div class="serv-title">Successioni e Patrimonio</div><p class="serv-body">Pianificazione successoria e tutela del patrimonio familiare.</p></div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti" class="dark">
+  <div class="contatti-grid">
+    <div class="reveal">
+      <div class="section-label white">Dove siamo</div>
+      <h2 class="light-h">Contatti<em>.</em></h2>
+      <div class="info-list">
+        <div class="info-row">
+          <div class="info-lbl">Indirizzo</div>
+          <div class="info-val">Via De Gasperi 4<br>20831 Seregno (MB)</div>
+        </div>
+        <div class="info-row">
+          <div class="info-lbl">Telefono</div>
+          <div class="info-val"><a href="tel:036224122">0362 241226</a></div>
+        </div>
+        <div class="info-row">
+          <div class="info-lbl">Email</div>
+          <div class="info-val"><a href="mailto:franco.arosio@studioarosio.com">franco.arosio@studioarosio.com</a></div>
+        </div>
+        <div class="info-row">
+          <div class="info-lbl">Orari</div>
+          <div class="info-val orari">
+            <span class="orario-day">Lun – Ven</span><span class="orario-time">09:00–12:30 / 14:30–18:00</span>
+            <span class="orario-day">Sabato</span><span class="orario-time">Chiuso</span>
+            <span class="orario-day">Domenica</span><span class="orario-time">Chiuso</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label>Nome *</label><input type="text" placeholder="Mario" required /></div>
+          <div class="form-group"><label>Cognome *</label><input type="text" placeholder="Rossi" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email *</label><input type="email" placeholder="mario@email.it" required /></div>
+          <div class="form-group"><label>Telefono</label><input type="tel" placeholder="333 123 4567" /></div>
+        </div>
+        <div class="form-group">
+          <label>Tipo di richiesta</label>
+          <select>
+            <option value="">Seleziona...</option>
+            <option>Consulenza fiscale</option>
+            <option>Contabilità e bilancio</option>
+            <option>Dichiarazione dei redditi</option>
+            <option>Paghe e personale</option>
+            <option>Consulenza societaria</option>
+            <option>Apertura partita IVA</option>
+            <option>Altro</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Messaggio *</label><textarea placeholder="Descrivi brevemente la tua richiesta..." required></textarea></div>
+        <p class="form-privacy">I dati saranno trattati nel rispetto della <a href="privacy.html">Privacy Policy</a> ai sensi del GDPR 2016/679 e D.Lgs. 196/2003.</p>
+        <button type="submit" class="btn-submit">Invia richiesta</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Studio Arosio Franco<span class="dot">.</span></div>
+    <div class="footer-sub">Dottore Commercialista e Revisore Legale — Seregno (MB)</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#studio">Lo Studio</a></li>
+    <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="privacy.html">Cookie Policy</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Studio Arosio Franco<br>P.IVA 02683340968</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  document.getElementById('navToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+  document.getElementById('mobileMenu').querySelectorAll('a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*100); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '✓ Inviato con successo';
+    btn.style.background = '#0f2640'; btn.style.color = '#0ABAB5';
+    setTimeout(() => { btn.textContent = 'Invia richiesta'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+  }
+</script>
+</body>
+</html>
