@@ -159,6 +159,43 @@
     .reveal.visible { opacity: 1; transform: none; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
 
+    /* NEWS TICKER */
+    .ticker-widget { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .ticker-header { display: flex; align-items: center; gap: 1rem; padding: .7rem 5vw; border-bottom: 1px solid rgba(255,255,255,.05); }
+    .ticker-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: pulse 2s ease infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+    .ticker-badge-text { font-size: .65rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--teal); }
+    .ticker-source-text { font-size: .65rem; color: rgba(255,255,255,.25); margin-left: auto; }
+    .ticker-strip { overflow: hidden; }
+    .ticker-track { display: flex; white-space: nowrap; animation: scroll-left 50s linear infinite; }
+    .ticker-strip:hover .ticker-track { animation-play-state: paused; cursor: pointer; }
+    @keyframes scroll-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .ticker-item { display: inline-flex; align-items: center; gap: .7rem; padding: .75rem 2rem .75rem 0; border-right: 1px solid rgba(255,255,255,.05); margin-right: 2rem; text-decoration: none; flex-shrink: 0; }
+    .ticker-item:hover .t-text { color: var(--teal); }
+    .t-date { font-size: .65rem; color: rgba(255,255,255,.25); flex-shrink: 0; }
+    .t-sep { width: 1px; height: 10px; background: rgba(255,255,255,.1); flex-shrink: 0; }
+    .t-text { font-size: .85rem; font-weight: 300; color: rgba(255,255,255,.65); transition: color .2s; }
+    .t-arrow { font-size: .72rem; color: rgba(255,255,255,.15); transition: color .2s; flex-shrink: 0; }
+    .ticker-item:hover .t-arrow { color: var(--teal); }
+
+    /* NEWS CARDS */
+    .news-section { padding: 100px 5vw; background: var(--white); }
+    .news-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .news-view-all { font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); text-decoration: none; }
+    .news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--gray-light); border: 1px solid var(--gray-light); }
+    .news-card { background: var(--white); padding: 1.8rem 1.6rem; display: flex; flex-direction: column; gap: .6rem; text-decoration: none; transition: background .2s; border-bottom: 2px solid transparent; }
+    .news-card:hover { background: var(--navy); border-color: var(--teal); }
+    .news-tag { font-size: .63rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
+    .news-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--text); line-height: 1.4; transition: color .2s; }
+    .news-card:hover .news-title { color: var(--white); }
+    .news-excerpt { font-size: .82rem; font-weight: 300; color: var(--gray); line-height: 1.6; flex: 1; transition: color .2s; }
+    .news-card:hover .news-excerpt { color: rgba(255,255,255,.45); }
+    .news-footer { display: flex; justify-content: space-between; align-items: center; margin-top: .5rem; }
+    .news-date { font-size: .7rem; color: var(--gray); transition: color .2s; }
+    .news-card:hover .news-date { color: rgba(255,255,255,.3); }
+    .news-link { font-size: .7rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); transition: color .2s; }
+    .news-card:hover .news-link { color: var(--teal); }
+
     /* MOBILE */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
@@ -166,15 +203,18 @@
       .nav-toggle { display: flex; }
       .studio-grid, .contatti-grid { grid-template-columns: 1fr; gap: 3rem; }
       .servizi-grid { grid-template-columns: 1fr 1fr; }
+      .news-grid { grid-template-columns: 1fr 1fr; }
       .hero-cards { grid-template-columns: 1fr; }
       .hero-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
       .mv-item { grid-template-columns: 1fr; gap: .5rem; }
-      section.light, section.off, section.dark { padding: 64px 24px; }
+      section.light, section.off, section.dark, .news-section { padding: 64px 24px; }
       footer { padding: 2.5rem 24px; }
       .form-row { grid-template-columns: 1fr; }
+      .ticker-header { padding: .6rem 24px; }
+      .ticker-source-text { display: none; }
     }
     @media (max-width: 560px) {
-      .servizi-grid { grid-template-columns: 1fr; }
+      .servizi-grid, .news-grid { grid-template-columns: 1fr; }
       .info-val.orari { grid-template-columns: 1fr; }
     }
   </style>
@@ -186,6 +226,7 @@
   <ul class="nav-links">
     <li><a href="#studio">Lo Studio</a></li>
     <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#news">News</a></li>
     <li><a href="#contatti">Contatti</a></li>
     <li><a href="#contatti" class="nav-cta">Consulenza</a></li>
   </ul>
@@ -194,6 +235,7 @@
 <div class="nav-mobile" id="mobileMenu">
   <a href="#studio">Lo Studio</a>
   <a href="#servizi">Servizi</a>
+  <a href="#news">News Fiscali</a>
   <a href="#contatti">Contatti</a>
   <a href="#contatti" style="color:var(--teal)!important">→ Richiedi consulenza</a>
 </div>
@@ -226,6 +268,18 @@
     </a>
   </div>
 </section>
+
+<!-- NEWS TICKER -->
+<div class="ticker-widget">
+  <div class="ticker-header">
+    <div class="ticker-dot"></div>
+    <span class="ticker-badge-text">Aggiornamenti fiscali</span>
+    <span class="ticker-source-text">Agenzia delle Entrate · INPS</span>
+  </div>
+  <div class="ticker-strip" title="Passa sopra per fermare · clicca per aprire la notizia">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
 
 <!-- LO STUDIO -->
 <section id="studio" class="light">
@@ -284,6 +338,18 @@
     <div class="serv-card"><div class="serv-num">07</div><div class="serv-title">Revisione Legale</div><p class="serv-body">Revisione legale, sindaco revisore e certificazione dei bilanci societari.</p></div>
     <div class="serv-card"><div class="serv-num">08</div><div class="serv-title">Successioni e Patrimonio</div><p class="serv-body">Pianificazione successoria e tutela del patrimonio familiare.</p></div>
   </div>
+</section>
+
+<!-- NEWS CARDS -->
+<section id="news" class="news-section">
+  <div class="news-header reveal">
+    <div>
+      <div class="section-label">Aggiornamenti</div>
+      <h2>News <em>fiscali</em></h2>
+    </div>
+    <a href="https://www.agenziaentrate.gov.it/portale/notizie" target="_blank" rel="noopener" class="news-view-all">Tutte le notizie →</a>
+  </div>
+  <div class="news-grid reveal" id="newsGrid"></div>
 </section>
 
 <!-- CONTATTI -->
@@ -357,6 +423,7 @@
   <ul class="footer-links">
     <li><a href="#studio">Lo Studio</a></li>
     <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#news">News</a></li>
     <li><a href="#contatti">Contatti</a></li>
     <li><a href="privacy.html">Privacy Policy</a></li>
     <li><a href="privacy.html">Cookie Policy</a></li>
@@ -365,6 +432,77 @@
 </footer>
 
 <script>
+  // Notizie di fallback (mostrate se il feed non carica)
+  const fallbackNews = [
+    { tag:"Fisco", title:"Aggiornamenti fiscali in caricamento...", excerpt:"Le ultime notizie dall'Agenzia delle Entrate verranno caricate a breve.", date:"", url:"https://www.agenziaentrate.gov.it/portale/notizie" }
+  ];
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    try {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' });
+    } catch(e) { return ''; }
+  }
+
+  function stripHtml(str) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = str || '';
+    return tmp.textContent.trim().slice(0, 140) + (tmp.textContent.length > 140 ? '…' : '');
+  }
+
+  function buildNews(items) {
+    const track = document.getElementById('tickerTrack');
+    const grid = document.getElementById('newsGrid');
+    track.innerHTML = '';
+    grid.innerHTML = '';
+
+    // Ticker (duplicato per loop infinito)
+    [...items, ...items].forEach(n => {
+      const a = document.createElement('a');
+      a.href = n.url; a.target = '_blank'; a.rel = 'noopener'; a.className = 'ticker-item';
+      a.innerHTML = `<span class="t-date">${n.date}</span><span class="t-sep"></span><span class="t-text">${n.title}</span><span class="t-arrow">→</span>`;
+      track.appendChild(a);
+    });
+
+    // Cards (prime 3)
+    items.slice(0, 3).forEach(n => {
+      const a = document.createElement('a');
+      a.href = n.url; a.target = '_blank'; a.rel = 'noopener'; a.className = 'news-card';
+      a.innerHTML = `<div class="news-tag">${n.tag}</div><div class="news-title">${n.title}</div><div class="news-excerpt">${n.excerpt}</div><div class="news-footer"><span class="news-date">${n.date}</span><span class="news-link">Leggi →</span></div>`;
+      grid.appendChild(a);
+    });
+  }
+
+  // Carica feed RSS Agenzia delle Entrate tramite proxy CORS
+  const RSS_URL = encodeURIComponent('https://www.agenziaentrate.gov.it/portale/rss/notizie');
+  fetch(`https://api.rss2json.com/v1/api.json?rss_url=${RSS_URL}&count=8`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('feed vuoto');
+      const items = data.items.map(item => ({
+        tag: 'Fisco',
+        title: item.title,
+        excerpt: stripHtml(item.description || item.content),
+        date: formatDate(item.pubDate),
+        url: item.link || 'https://www.agenziaentrate.gov.it/portale/notizie'
+      }));
+      buildNews(items);
+    })
+    .catch(() => {
+      // Fallback: notizie statiche di riserva
+      const staticNews = [
+        { tag:"Scadenza", title:"Versamento IVA trimestrale — 3° trimestre", excerpt:"Entro il 16 novembre il versamento dell'IVA relativa al terzo trimestre per i contribuenti con liquidazione trimestrale.", date:"ott 2026", url:"https://www.agenziaentrate.gov.it/portale/scadenze" },
+        { tag:"Novità", title:"Dichiarazione dei redditi: modelli aggiornati", excerpt:"L'Agenzia delle Entrate ha pubblicato i nuovi modelli con le istruzioni per l'anno d'imposta in corso.", date:"ott 2026", url:"https://www.agenziaentrate.gov.it/portale/dichiarazione-dei-redditi" },
+        { tag:"INPS", title:"Contributi artigiani e commercianti: acconto novembre", excerpt:"Entro il 16 novembre scade il versamento dell'acconto dei contributi fissi per artigiani e commercianti.", date:"ott 2026", url:"https://www.inps.it" },
+        { tag:"Aggiornamento", title:"Fattura elettronica: nuove specifiche tecniche", excerpt:"Pubblicate le specifiche tecniche per la fatturazione elettronica per il prossimo anno.", date:"ott 2026", url:"https://www.agenziaentrate.gov.it/portale/fatturazione-elettronica" }
+      ];
+      buildNews(staticNews);
+    });
+
+  // Placeholder iniziale mentre carica
+  buildNews(fallbackNews);
+
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
   document.getElementById('navToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
