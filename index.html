@@ -316,18 +316,20 @@
       </div>
     </div>
     <div class="reveal">
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" action="https://formspree.io/f/mwllvvga" method="POST">
+        <input type="hidden" name="_subject" value="Nuova richiesta da studiosarosio.com" />
+        <input type="hidden" name="_language" value="it" />
         <div class="form-row">
-          <div class="form-group"><label>Nome *</label><input type="text" placeholder="Mario" required /></div>
-          <div class="form-group"><label>Cognome *</label><input type="text" placeholder="Rossi" required /></div>
+          <div class="form-group"><label>Nome *</label><input type="text" name="nome" placeholder="Mario" required /></div>
+          <div class="form-group"><label>Cognome *</label><input type="text" name="cognome" placeholder="Rossi" required /></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Email *</label><input type="email" placeholder="mario@email.it" required /></div>
-          <div class="form-group"><label>Telefono</label><input type="tel" placeholder="333 123 4567" /></div>
+          <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="mario@email.it" required /></div>
+          <div class="form-group"><label>Telefono</label><input type="tel" name="telefono" placeholder="333 123 4567" /></div>
         </div>
         <div class="form-group">
           <label>Tipo di richiesta</label>
-          <select>
+          <select name="tipo_richiesta">
             <option value="">Seleziona...</option>
             <option>Consulenza fiscale</option>
             <option>Contabilità e bilancio</option>
@@ -338,7 +340,7 @@
             <option>Altro</option>
           </select>
         </div>
-        <div class="form-group"><label>Messaggio *</label><textarea placeholder="Descrivi brevemente la tua richiesta..." required></textarea></div>
+        <div class="form-group"><label>Messaggio *</label><textarea name="messaggio" placeholder="Descrivi brevemente la tua richiesta..." required></textarea></div>
         <p class="form-privacy">I dati saranno trattati nel rispetto della <a href="privacy.html">Privacy Policy</a> ai sensi del GDPR 2016/679 e D.Lgs. 196/2003.</p>
         <button type="submit" class="btn-submit">Invia richiesta</button>
       </form>
@@ -371,13 +373,6 @@
     entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*100); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
-    btn.textContent = '✓ Inviato con successo';
-    btn.style.background = '#0f2640'; btn.style.color = '#0ABAB5';
-    setTimeout(() => { btn.textContent = 'Invia richiesta'; btn.style.background = ''; btn.style.color = ''; }, 3000);
-  }
 </script>
 </body>
 </html>
