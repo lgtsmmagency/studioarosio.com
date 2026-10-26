@@ -348,7 +348,7 @@
       <div class="section-label">Aggiornamenti</div>
       <h2>News <em>fiscali</em></h2>
     </div>
-    <a href="https://www.agenziaentrate.gov.it/portale/notizie" target="_blank" rel="noopener" class="news-view-all">Tutte le notizie →</a>
+    <a href="https://www.fiscooggi.it" target="_blank" rel="noopener" class="news-view-all">Tutte le notizie →</a>
   </div>
   <div class="news-grid reveal" id="newsGrid"></div>
 </section>
@@ -476,7 +476,7 @@
   }
 
   // Carica feed RSS Agenzia delle Entrate tramite proxy CORS
-  const RSS_URL = encodeURIComponent('https://www.agenziaentrate.gov.it/portale/rss/notizie');
+  const RSS_URL = encodeURIComponent('https://www.fiscooggi.it/rss.xml');
   fetch(`https://api.rss2json.com/v1/api.json?rss_url=${RSS_URL}&count=8`)
     .then(r => r.json())
     .then(data => {
@@ -493,10 +493,9 @@
     .catch(() => {
       // Fallback: notizie statiche di riserva
       const staticNews = [
-        { tag:"Scadenza", title:"Versamento IVA trimestrale — 3° trimestre", excerpt:"Entro il 16 novembre il versamento dell'IVA relativa al terzo trimestre per i contribuenti con liquidazione trimestrale.", date:"ott 2026", url:"https://www.agenziaentrate.gov.it/portale/scadenze" },
-        { tag:"Novità", title:"Dichiarazione dei redditi: modelli aggiornati", excerpt:"L'Agenzia delle Entrate ha pubblicato i nuovi modelli con le istruzioni per l'anno d'imposta in corso.", date:"ott 2026", url:"https://www.agenziaentrate.gov.it/portale/dichiarazione-dei-redditi" },
-        { tag:"INPS", title:"Contributi artigiani e commercianti: acconto novembre", excerpt:"Entro il 16 novembre scade il versamento dell'acconto dei contributi fissi per artigiani e commercianti.", date:"ott 2026", url:"https://www.inps.it" },
-        { tag:"Aggiornamento", title:"Fattura elettronica: nuove specifiche tecniche", excerpt:"Pubblicate le specifiche tecniche per la fatturazione elettronica per il prossimo anno.", date:"ott 2026", url:"https://www.agenziaentrate.gov.it/portale/fatturazione-elettronica" }
+        { tag:"Fisco", title:"Ultime notizie fiscali — FiscoOggi", excerpt:"Consulta FiscoOggi, la rivista ufficiale dell'Agenzia delle Entrate, per gli aggiornamenti fiscali più recenti.", date:"", url:"https://www.fiscooggi.it" },
+        { tag:"INPS", title:"Circolari e messaggi INPS", excerpt:"Consulta il portale INPS per le ultime circolari su contributi, pensioni e prestazioni.", date:"", url:"https://www.inps.it/it/it/nuova-comunicazione/news.html" },
+        { tag:"Scadenze", title:"Calendario delle scadenze fiscali", excerpt:"Tieni sotto controllo le scadenze fiscali del mese con il calendario dell'Agenzia delle Entrate.", date:"", url:"https://www.agenziaentrate.gov.it" }
       ];
       buildNews(staticNews);
     });
